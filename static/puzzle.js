@@ -51,7 +51,7 @@ function drawPuzzle() {
 
     // Verifica si el puzzle está resuelto
     if (isSolved() && !messageShown) {
-        // completa la imagen 
+        // Completa la imagen
         ctx.drawImage(puzzleImage, 0, 0, puzzleImage.width, puzzleImage.height, 0, 0, canvas.width, canvas.height);
         showWinMessage();
     }
@@ -139,7 +139,32 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-//crear la funcionalidad por si se preciona el boton de shufflePuzzle
+// Agregar funcionalidad de clic en el canvas para mover las piezas
+canvas.addEventListener('click', (event) => {
+    if (!isSolved() && !messageShown) {
+        const rect = canvas.getBoundingClientRect();
+        const clickX = event.clientX - rect.left;
+        const clickY = event.clientY - rect.top;
+
+        const clickedCol = Math.floor(clickX / cellWidth);
+        const clickedRow = Math.floor(clickY / cellHeight);
+
+        // Verificar si la celda clicada está adyacente a la celda vacía
+        if (isAdjacent(clickedCol, clickedRow, emptyCell.x, emptyCell.y)) {
+            puzzle[emptyCell.x][emptyCell.y] = puzzle[clickedCol][clickedRow];
+            puzzle[clickedCol][clickedRow] = null;
+            emptyCell.x = clickedCol;
+            emptyCell.y = clickedRow;
+            drawPuzzle();
+        }
+    }
+});
+
+function isAdjacent(x1, y1, x2, y2) {
+    return (Math.abs(x1 - x2) === 1 && y1 === y2) || (Math.abs(y1 - y2) === 1 && x1 === x2);
+}
+
+//crear la funcionalidad por si se presiona el botón de shufflePuzzle
 const shufflePuzzle = document.getElementById('shuffleButton');
 shufflePuzzle.addEventListener('click', () => {
     initPuzzle();
@@ -147,7 +172,7 @@ shufflePuzzle.addEventListener('click', () => {
     messageShown = false;
 });
 
-//crear la funcionalidad por si se preciona el boton de solvePuzzle
+//crear la funcionalidad por si se presiona el botón de solvePuzzle
 const solvePuzzle = document.getElementById('solveButton');
 solvePuzzle.addEventListener('click', () => {
     puzzle = [];
