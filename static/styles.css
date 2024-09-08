@@ -1,0 +1,55 @@
+canvas {
+    border: 2px solid white;
+}
+
+.title {
+    text-align: center;
+    font-size: 72px;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.601)
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:  #323232;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+
+#puzzleControls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.btn {
+    background-color: #3498db;  /* Color azul */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;  /* Bordes redondeados */
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;  /* Cambio de color al pasar el mouse */
+}
+
+#puzzleCanvas {
+    margin-top: 20px;
+    border: 2px solid #333;
+    background-color: white;
+}
